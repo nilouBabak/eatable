@@ -12,6 +12,13 @@ const styles = (theme: Theme) => ({
         width: 160,
         height: 160,
       },
+      button: {
+        margin: theme.spacing.unit,
+      },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
    });
 
    interface ISignUpProps extends WithStyles {}
@@ -36,7 +43,7 @@ class SignUp extends Component<ISignUpProps> {
           <TextField
           id="outlined-name"
           label="Name"
-        //   className={classes.textField}
+          className={classes.textField}
         //   value={this.state.name}
         //   onChange={this.handleChange('name')}
           margin="normal"
@@ -45,15 +52,15 @@ class SignUp extends Component<ISignUpProps> {
         <TextField
           id="outlined-name"
           label="Password"
-        //   className={classes.textField}
+          className={classes.textField}
         //   value={this.state.name}
         //   onChange={this.handleChange('name')}
           margin="normal"
           variant="outlined"
         />
 
-      <Button variant="contained" color="primary"
-    //    className={classes.button}
+      <Button variant="contained" color="primary" href="/profile"
+       className={classes.button}
        >
         Log In
       </Button>
