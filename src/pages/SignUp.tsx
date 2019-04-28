@@ -1,14 +1,66 @@
 import React, { Component } from 'react';
+import { Typography, Paper, Avatar, TextField, Button, Grid, Theme, WithStyles, withStyles } from '@material-ui/core';
+import "./styles.css"
+import classNames from 'classnames';
+import CrockPot from '../images/crock-pot.png'
 
-class SignUp extends Component {
+const styles = (theme: Theme) => ({
+    avatar: {
+        margin: 10,
+      },
+      bigAvatar: {
+        width: 160,
+        height: 160,
+      },
+   });
+
+   interface ISignUpProps extends WithStyles {}
+class SignUp extends Component<ISignUpProps> {
+    
   render(){
+    const { classes } = this.props;
     return(
-      <div className="SignUp">
-      This is the signup page
-      Please log in or sign up below
-      </div>
+      <Paper>
+      <Grid 
+     container
+     direction="column"
+     justify="center"
+     alignItems="center"
+   >      <Avatar
+   alt="eatable"
+   src={CrockPot}
+   className={classNames(classes.avatar, classes.bigAvatar)}
+ />
+          <Typography> eatable</Typography>
+          <Typography> healthy dining on a dollar</Typography>
+          <TextField
+          id="outlined-name"
+          label="Name"
+        //   className={classes.textField}
+        //   value={this.state.name}
+        //   onChange={this.handleChange('name')}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-name"
+          label="Password"
+        //   className={classes.textField}
+        //   value={this.state.name}
+        //   onChange={this.handleChange('name')}
+          margin="normal"
+          variant="outlined"
+        />
+
+      <Button variant="contained" color="primary"
+    //    className={classes.button}
+       >
+        Log In
+      </Button>
+      </Grid>
+      </Paper>
     )
   }
 }
 
-export default SignUp;
+export default withStyles(styles)(SignUp);
