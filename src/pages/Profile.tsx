@@ -7,7 +7,7 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core';
-import './styles.css';
+import './styles.scss';
 import classNames from 'classnames';
 import UserIcon from '@material-ui/icons/AccountCircle';
 import ProfileTabs from '../components/ProfileTabs';

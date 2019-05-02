@@ -1,0 +1,58 @@
+.basket-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .basket-page-title {
+        height: 44px;
+        color: #1F355E;
+        font-family: fantasy;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+        padding: 40px;
+    }
+    .Or {
+        display: flex;
+        flex-direction: row;
+        margin-top: 40px;
+        color: #1F355E;
+        font-family: fantasy;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+    
+        hr {
+            border: 0;
+            width: 50%;
+            background-color: silver;
+            height: 1px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+    }
+    .view-all {
+        height: 45px;
+        width: 230px;
+        margin-top: 20px;
+        border-radius: 5px; 
+        font-size: 15px;
+        color: white;
+        background-color: #3f51b5;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        align-self: center;
+    }
+    .food-guide {
+        background-image: url(../Assets/canada-new-food-guide-2019.png);
+        background-size: cover;
+        height: 373px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        .categories {
+            &:hover, &:focus{
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
