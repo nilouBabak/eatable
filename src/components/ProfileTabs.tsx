@@ -11,6 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   Grid,
+  Button,
 } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
@@ -121,20 +122,29 @@ class ProfileTabs extends React.Component<
               alignItems="center"
               xs={12}
             >
-
-<List>
+            <List>
                 <ListItem button component="a" key={1} href={"/saved-basket"}>
                   <ListItemText primary={"View My Saved Baskets "} />
                 </ListItem>
             
                 <ListItem button component="a" key={2} href={"/favourites"}>
-                  <ListItemText primary={"View my Favourites"} />
+                  <ListItemText primary={"View My Favourites"} />
                 </ListItem>
-                <ListItem button component="a" key={3} href={"/preferences"}>
+                {/* <ListItem button component="a" key={3} href={"/preferences"}>
                   <ListItemText primary={"Update my preferences"} />
-                </ListItem>
+                </ListItem> */}
+
             </List>
+          <Button
+            variant="contained"
+            color="primary"
+            href="/preferences"
+            className={classes.button}
+          >
+            Update my preferences
+          </Button>
             </Grid>
+
           </TabContainer>
           <TabContainer dir="rtl">
             <Grid

@@ -17,9 +17,13 @@ import {
   FormGroup,
   FormControlLabel,
   Switch,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails
 } from '@material-ui/core';
 import './styles.scss';
 import Select from 'react-select';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const styles = (theme: Theme) => ({
   avatar: {
@@ -36,6 +40,9 @@ const styles = (theme: Theme) => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
   },
+  formControl: { 
+    margin: theme.spacing.unit
+  }
 });
 
 interface IPreferencesProps extends WithStyles {}
@@ -60,11 +67,11 @@ handleBadgeVisibility = () => {
       <Paper>
          
 
-        <Grid container direction="column"  xs={11}>
+        <Grid container direction="column"  xs={11} alignContent="center">
         <Typography variant="h6" color="inherit" align="center" >Preferences</Typography>
         <Typography color="inherit" >Choose which preferences you would like to set to help us customize your basket</Typography>
 
-        <FormControl className={classes.formControl}>
+        <FormControl className={classes.formControl} >
           <InputLabel shrink htmlFor="age-native-label-placeholder">
             Budget 
           </InputLabel>
@@ -79,20 +86,23 @@ handleBadgeVisibility = () => {
           </NativeSelect>
         </FormControl>
           {/* Add switch controls to modify the form and update what type of preferences the user wants to set */}
-          <FormControl className={classes.formControl}>
-          <InputLabel shrink htmlFor="age-native-label-placeholder">
-            Favourites 
-          </InputLabel>
-          <NativeSelect
-            value="{this.state.age}"
-            onChange={() => console.log("this.handleChange('age')")}
-            input={<Input name="Add More" id="age-native-label-placeholder" />}
-          >
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
-          </NativeSelect>
-        </FormControl>
+          <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography className={classes.heading}>Favourites</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Grid container={true} direction="column">
+          <Typography> You can set your likes or dislikes here, or as you go when viewing your basket.</Typography>
+                  <Typography>Likes</Typography>
+        <Select label="Likes" placeholder="Type to search" options={options} isMulti={true}/>
+        <br></br>
+        <Typography>Dislikes</Typography>
+
+        <Select label="Dislikes" placeholder="Type to search" options={options} isMulti={true}/>
+        </Grid>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      
         <FormGroup row>
           <FormControlLabel
             control={
@@ -100,17 +110,9 @@ handleBadgeVisibility = () => {
             }
             label="Dietary Restrictions"
           />
-           {this.state.invisible && (  <NativeSelect
-            value="{this.state.age}"
-            onChange={() => console.log("this.handleChange('age')")}
-            input={<Input name="age" id="age-native-label-placeholder" />}
-          >
-            <option value={10}>Vegetarian</option>
-            <option value={20}>Pescatarian</option>
-            <option value={30}>Keto</option>
-          </NativeSelect>)
-           }
-
+           {this.state.invisible && (        
+           <Select options={options} isMulti={true}/>
+)}
 <FormGroup row>
           <FormControlLabel
             control={
