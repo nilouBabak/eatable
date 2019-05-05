@@ -9,11 +9,6 @@ import {
   Theme,
   WithStyles,
   withStyles,
-  FormControl,
-  InputLabel,
-  NativeSelect,
-  Input,
-  FormHelperText,
 } from '@material-ui/core';
 import './styles.css';
 import classNames from 'classnames';
@@ -36,8 +31,8 @@ const styles = (theme: Theme) => ({
   },
 });
 
-interface IPreferencesProps extends WithStyles {}
-class Preferences extends Component<IPreferencesProps> {
+interface IAboutMeProps extends WithStyles {}
+class AboutMe extends Component<IAboutMeProps> {
   render() {
     const {classes} = this.props;
     return (
@@ -49,11 +44,10 @@ class Preferences extends Component<IPreferencesProps> {
             src={CrockPot}
             className={classNames(classes.avatar, classes.bigAvatar)}
           />
-          <Typography> eatable</Typography>
-          <Typography> healthy dining on a dollar</Typography>
+          <Typography> Hello, name</Typography>
           <TextField
             id="outlined-name"
-            label="Budget"
+            label="Your Name"
             className={classes.textField}
             margin="normal"
             variant="outlined"
@@ -65,29 +59,29 @@ class Preferences extends Component<IPreferencesProps> {
             margin="normal"
             variant="outlined"
           />
-                 <FormControl className={classes.formControl}>
-          <InputLabel shrink htmlFor="age-native-label-placeholder">
-            Age
-          </InputLabel>
-          <NativeSelect
-            value="{this.state.age}"
-            onChange={() => console.log("this.handleChange('age')")}
-            input={<Input name="age" id="age-native-label-placeholder" />}
-          >
-            <option value="">None</option>
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
-          </NativeSelect>
-          <FormHelperText>Label + placeholder</FormHelperText>
-        </FormControl>
+          Age : ____
+          <br>
+          Height : ____
+          <br>
+          Weight : ____
+          <br>
+          Gender : ____
+          <br>
+          Calories Per Day : ___
+          <br>
+          Dietary Restrictions : ___ 
+          <br>
+          Budget : ___
+          <br>
+          Preferences? 
+          </br>
           <Button
             variant="contained"
             color="primary"
             href="/profile"
             className={classes.button}
           >
-            Save Preferences
+            Update
           </Button>
         </Grid>
       </Paper>
@@ -95,4 +89,4 @@ class Preferences extends Component<IPreferencesProps> {
   }
 }
 
-export default withStyles(styles)(Preferences);
+export default withStyles(styles)(AboutMe);
