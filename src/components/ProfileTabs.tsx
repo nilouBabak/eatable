@@ -79,10 +79,10 @@ class ProfileTabs extends React.Component<
             indicatorColor="secondary"
             textColor="secondary"
           >
-            <Tab icon={<PersonPinIcon />} label="Me" />
-            <Tab icon={<ThumbUpDown />} label="Likes" />
+            <Tab icon={<PersonPinIcon />} label="About Me" />
+            {/* <Tab icon={<ThumbUpDown />} label="Likes" /> */}
             {/* <Tab icon={<FavoriteIcon />} label="Favourites" /> */}
-            <Tab icon={<PreferenceIcon />} label="Prefs" />
+            <Tab icon={<PreferenceIcon />} label="My Preferences" />
           </Tabs>
         </Paper>
         <SwipeableViews
@@ -98,19 +98,19 @@ class ProfileTabs extends React.Component<
               alignItems="center"
               xs={12}
             >
-              <List>
+              <ul>
                 {ProfileListLabel.map((text, index) => (
-                  <ListItem component="p" key={text}>
+                  <li key={text}>
                    {ProfileListValue[index]}
+                   {/* &nbsp;
                    &nbsp;
                    &nbsp;
                    &nbsp;
-                   &nbsp;
-                   &nbsp;
-                    <ListItemText primary={text} />
-                  </ListItem>
+                   &nbsp; */}
+                   {text}
+                  </li>
                 ))}
-              </List>
+              </ul>
             </Grid>
           </TabContainer>
           <TabContainer dir="rtl">
@@ -121,15 +121,18 @@ class ProfileTabs extends React.Component<
               alignItems="center"
               xs={12}
             >
-            <List>
-              {linkText.map((text, index) => (
-                <ListItem button component="a" key={text} href={links[index]}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <ThumbDown /> : <ThumbUp />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
+
+<List>
+                <ListItem button component="a" key={1} href={"/saved-basket"}>
+                  <ListItemText primary={"View My Saved Baskets "} />
                 </ListItem>
-              ))}
+            
+                <ListItem button component="a" key={2} href={"/favourites"}>
+                  <ListItemText primary={"View my Favourites"} />
+                </ListItem>
+                <ListItem button component="a" key={3} href={"/preferences"}>
+                  <ListItemText primary={"Update my preferences"} />
+                </ListItem>
             </List>
             </Grid>
           </TabContainer>

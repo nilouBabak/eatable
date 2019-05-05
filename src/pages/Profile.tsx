@@ -6,6 +6,7 @@ import {
   Theme,
   WithStyles,
   withStyles,
+  Typography,
 } from '@material-ui/core';
 import './styles.scss';
 import classNames from 'classnames';
@@ -17,8 +18,8 @@ const styles = (theme: Theme) => ({
     margin: 10,
   },
   bigAvatar: {
-    width: 160,
-    height: 160,
+    width: 60,
+    height: 60,
   },
   button: {
     margin: theme.spacing.unit,
@@ -36,13 +37,21 @@ class Profile extends Component<IProfileProps> {
     return (
       <Paper>
         <Grid container direction="column" justify="center" alignItems="center">
-          {' '}
-          <Avatar
+        <Grid container direction="row" justify="center" alignItems="center" sm={6}>
+          <Grid item sm={2} ><Avatar
             alt="eatable"
             className={classNames(classes.avatar, classes.bigAvatar)}
           >
             <UserIcon />
           </Avatar>
+          </Grid>
+          <Grid item sm={4}>
+          <Typography> Hello, name</Typography>
+          <Typography>Welcome back!</Typography>
+
+
+          </Grid>
+          </Grid>
           <ProfileTabs />
         </Grid>
       </Paper>

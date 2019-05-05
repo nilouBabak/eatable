@@ -10,7 +10,7 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core';
-import './styles.css';
+import './styles.scss';
 import classNames from 'classnames';
 import CrockPot from '../images/crock-pot.png';
 
@@ -60,21 +60,21 @@ class AboutMe extends Component<IAboutMeProps> {
             variant="outlined"
           />
           Age : ____
-          <br>
+          <br></br>
           Height : ____
-          <br>
+          <br></br>
           Weight : ____
-          <br>
+          <br></br>
           Gender : ____
-          <br>
+          <br></br>
           Calories Per Day : ___
-          <br>
+          <br></br>
           Dietary Restrictions : ___ 
-          <br>
+          <br></br>
           Budget : ___
-          <br>
+          <br></br>
           Preferences? 
-          </br>
+          <br></br>
           <Button
             variant="contained"
             color="primary"
