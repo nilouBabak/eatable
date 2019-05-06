@@ -1,20 +1,29 @@
 
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
-interface Props {
+interface IBasketProps {
 }
 
-class Basket extends Component {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
+interface IBasketState {
+  redirectToItems: boolean
+  selectedCategory: string
+}
 
-    }
+class Basket extends Component<IBasketProps, IBasketState>{
+  state = {
+    redirectToItems: false,
+    selectedCategory: ''
   }
+
   foodGuideClicked = (category: string ) => {
     console.log('food guide clicked' + category)
+    this.setState({redirectToItems: true, selectedCategory: category});
   }
   render(){
+    if (this.state.redirectToItems) {
+      return <Redirect to={{ pathname: '/basket-items', category : this.state.selectedCategory}}/>
+    }
     return(
       <div className="basket-container">
         <h2 className="basket-page-title">Hey There! Discover Your Unique Basket By Choosing a Category Below</h2>

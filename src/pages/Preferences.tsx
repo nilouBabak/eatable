@@ -15,7 +15,7 @@ import {
   Input,
   FormHelperText,
 } from '@material-ui/core';
-import './styles.css';
+import './styles.scss';
 import classNames from 'classnames';
 import CrockPot from '../images/crock-pot.png';
 
