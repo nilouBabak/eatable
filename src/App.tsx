@@ -6,11 +6,16 @@ import Preferences from './pages/Preferences';
 import Basket from './pages/Basket';
 import Profile from './pages/Profile';
 import MenuAppBar from './components/MenuAppBar';
+import theme from "./theme";
+import { MuiThemeProvider } from '@material-ui/core';
+
 import BasketItems from './pages/BasketItems';
 
 class App extends Component {
   render() {
     return (
+
+    <MuiThemeProvider theme={theme}>
       <Router>
         <div>
           {/* TODO: Render a different version of the user app bar when the user is not logged in */}
@@ -22,6 +27,7 @@ class App extends Component {
           <Route path="/basket" component={Basket} />
         </div>
       </Router>
+      </MuiThemeProvider>
     );
   }
 }
