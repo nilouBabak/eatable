@@ -87,6 +87,42 @@ class Profile extends Component<IProfileProps> {
           <Grid>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography className={classes.heading}>
+                My Preferences
+              </Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <Grid container={true} direction="column">
+                <Typography>
+                  <List>
+                    {linkText.map((text, index) => (
+                      <ListItem
+                        button
+                        component="a"
+                        key={text}
+                        href={links[index]}
+                      >
+                        <ListItemText primary={text} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Typography>
+                <br />
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  href="/preferences"
+                  className={classes.button}
+                >
+                  Update my preferences
+                </Button>
+              </Grid>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+         
+          <ExpansionPanel>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <Typography className={classes.heading}>Saved Baskets</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -141,42 +177,7 @@ class Profile extends Component<IProfileProps> {
             </ExpansionPanelDetails>
           </ExpansionPanel>
 
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>
-                My Preferences
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Grid container={true} direction="column">
-                <Typography>
-                  <List>
-                    {linkText.map((text, index) => (
-                      <ListItem
-                        button
-                        component="a"
-                        key={text}
-                        href={links[index]}
-                      >
-                        <ListItemText primary={text} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Typography>
-                <br />
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  href="/preferences"
-                  className={classes.button}
-                >
-                  Update my preferences
-                </Button>
-              </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          </Grid>
+         </Grid>
           </Paper>
 
         </Grid>

@@ -2,18 +2,14 @@ import React, { Component } from "react";
 import {
   Typography,
   Paper,
-  Avatar,
   TextField,
   Button,
   Grid,
   Theme,
   WithStyles,
   withStyles,
-  FormControl,
-  InputLabel,
   NativeSelect,
   Input,
-  FormHelperText,
   FormGroup,
   FormControlLabel,
   Switch,
@@ -24,10 +20,6 @@ import {
 import "./styles.scss";
 import Select from "react-select";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-} from '@material-ui/core';
-import './styles.scss';
-import classNames from 'classnames';
-import CrockPot from '../images/crock-pot.png';
 
 const styles = (theme: Theme) => ({
   avatar: {
