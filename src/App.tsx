@@ -9,6 +9,7 @@ import MenuAppBar from './components/MenuAppBar';
 import theme from "./theme";
 import { MuiThemeProvider } from '@material-ui/core';
 
+import BasketItems from './pages/BasketItems';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/" component={SignUp} />
           <Route path="/profile" component={Profile} />
           <Route path="/preferences" component={Preferences} />
+          <Route path="/basket-items" component={BasketItems} />
           <Route path="/basket" component={Basket} />
         </div>
       </Router>

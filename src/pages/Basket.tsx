@@ -1,20 +1,37 @@
 
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
-interface Props {
+interface IBasketProps {
 }
 
-class Basket extends Component {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
+interface IBasketState {
+  redirectToItems: boolean
+  selectedCategory: string
+  viewAll: boolean
+}
 
-    }
+class Basket extends Component<IBasketProps, IBasketState>{
+  state = {
+    redirectToItems: false,
+    selectedCategory: '',
+    viewAll: false
   }
+
   foodGuideClicked = (category: string ) => {
     console.log('food guide clicked' + category)
+    this.setState({redirectToItems: true, selectedCategory: category});
   }
+
+  viewAllCategories = () => {
+    console.log('view all items in the basket')
+    this.setState({redirectToItems: true, viewAll: true});
+  }
+
   render(){
+    if (this.state.redirectToItems) {
+      return <Redirect to={{ pathname: '/basket-items', category : this.state.selectedCategory, viewAll: this.state.viewAll}}/>
+    }
     return(
       <div className="basket-container">
         <h2 className="basket-page-title">Hey There! Discover Your Unique Basket By Choosing a Category Below</h2>
@@ -28,7 +45,7 @@ class Basket extends Component {
         <div className="Or">
           <hr/> Or <hr/>
         </div>
-        <button className="view-all">View All</button>
+        <button className="view-all" onClick={this.viewAllCategories} >View All</button>
       </div>
     )
   }
