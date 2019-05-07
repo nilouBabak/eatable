@@ -29,6 +29,10 @@ const styles = (theme: Theme) => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
   },
+  rounded: {
+    borderRadius: "200px 200px 0 0",
+    margin: theme.spacing.unit * 4
+  }
 });
 
 interface ISignUpProps extends WithStyles {}
@@ -36,7 +40,7 @@ class SignUp extends Component<ISignUpProps> {
   render() {
     const {classes} = this.props;
     return (
-      <Paper>
+      <Paper classes={{rounded: classes.rounded}} elevation={20} square={false}>
         <Grid container direction="column" justify="center" alignItems="center">
           {' '}
           <Avatar
@@ -57,6 +61,7 @@ class SignUp extends Component<ISignUpProps> {
             id="outlined-name"
             label="Password"
             className={classes.textField}
+            type="password"
             margin="normal"
             variant="outlined"
           />

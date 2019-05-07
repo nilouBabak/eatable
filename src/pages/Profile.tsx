@@ -41,10 +41,9 @@ const styles = (theme: Theme) => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
   },
-  root: {
-  }, 
+
   rounded: {
-    borderRadius: 100
+    margin: theme.spacing.unit * 2
   }
 });
 
@@ -57,8 +56,7 @@ class Profile extends Component<IProfileProps> {
     const links = ["/profile", "/preferences", "/basket", "/"];
     return (
 
-        <Grid container direction="column">
-      <Paper style={{borderRadius: 100}} elevation={20} square={false}>
+        <Grid container direction="column" justify="center" alignItems="center">
 
           <Grid
             container
@@ -81,8 +79,10 @@ class Profile extends Component<IProfileProps> {
             </Grid>
           </Grid>
           {/* <ProfileTabs /> */}
+          <Typography variant={"h6"}> Profile Details </Typography>
+      
+          <Paper classes={{rounded: classes.rounded}} elevation={10} square={false}>
 
-        <Typography variant={"h6"}> Profile Details </Typography>
           
           <Grid>
           <ExpansionPanel>
@@ -177,9 +177,10 @@ class Profile extends Component<IProfileProps> {
             </ExpansionPanelDetails>
           </ExpansionPanel>
           </Grid>
-      </Paper>
+          </Paper>
 
         </Grid>
+
     );
   }
 }
