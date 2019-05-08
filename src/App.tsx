@@ -12,6 +12,13 @@ import { MuiThemeProvider } from '@material-ui/core';
 import BasketItems from './pages/BasketItems';
 
 class App extends Component {
+  state = {
+    name: "",
+    age: 0,
+    likes: [],
+    dislikes: [],
+    userId: ""
+  }
   render() {
     return (
 
@@ -20,8 +27,8 @@ class App extends Component {
         <div>
           {/* TODO: Render a different version of the user app bar when the user is not logged in */}
           <MenuAppBar> </MenuAppBar>
-          <Route exact path="/" component={SignUp} />
-          <Route path="/profile" component={Profile} />
+          {/* <Route exact path="/" component={() => <SignUp props={state}/>} /> */}
+          <Route path="/profile" component={Profile}></Route>
           <Route path="/preferences" component={Preferences} />
           <Route path="/basket-items" component={BasketItems} />
           <Route path="/basket" component={Basket} />

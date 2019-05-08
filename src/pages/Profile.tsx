@@ -10,20 +10,18 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Button
+  Button,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody
 } from "@material-ui/core";
 import "./styles.scss";
 import classNames from "classnames";
 import UserIcon from "@material-ui/icons/AccountCircle";
-import ProfileTabs from "../components/ProfileTabs";
-
+import avatarImage from "./../images/avatar.png"
 import ThumbDown from "@material-ui/icons/ThumbDownRounded";
 import ThumbUp from "@material-ui/icons/ThumbUpRounded";
-import ThumbUpDown from "@material-ui/icons/ThumbsUpDownRounded";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const styles = (theme: Theme) => ({
@@ -33,6 +31,9 @@ const styles = (theme: Theme) => ({
   bigAvatar: {
     width: 60,
     height: 60
+  },
+  smallAvatar: {
+    marginRight: -300
   },
   button: {
     margin: theme.spacing.unit
@@ -52,136 +53,224 @@ class Profile extends Component<IProfileProps> {
   render() {
     const { classes } = this.props;
 
-    const linkText = ["Profile", "Quick Preferences", "Your Basket", "Log out"];
-    const links = ["/profile", "/preferences", "/basket", "/"];
+    const likeComponent = <ThumbUp />;
+    const dislikeComponent = <ThumbDown />;
+
+    let id = 0;
+    function createData(name: string, value: string) {
+      id += 1;
+      return { id, name, value };
+    }
+
+    const rows = [
+      createData("Budget", "25-50"),
+      createData("Type of Diet", "Ketogenic"),
+      createData("Allergies", "None")
+      // createData("Likes", "Strawberry, Strawberry, Strawberry "),
+      // createData("Dislikes", "Strawberry, Strawberry, Strawberry ")
+    ];
+
+    const aboutMeRows = [
+      {
+        id: "5",
+        name: "Avatar",
+        value: (
+          <Avatar alt="avatar" src={avatarImage} className={classNames(classes.smallAvatar)}/>
+        )
+      },
+      {
+        id: "1",
+        name: "Name",
+        value: "Friend"
+      },
+      {
+        id: "2",
+        name: "Age",
+        value: "28"
+      },
+      {
+        id: "3",
+        name: "Height",
+        value: "5'8"
+      },
+      {
+        id: "4",
+        name: "Weight",
+        value: "170"
+      }
+    ];
+
+    const favouritesRows = [
+      {
+        id: "1",
+        name: "Strawberry",
+        value: likeComponent
+      },
+      {
+        id: "2",
+        name: "Almonds",
+        value: likeComponent
+      },
+      {
+        id: "3",
+        name: "Lettuce",
+        value: likeComponent
+      },
+      {
+        id: "4",
+        name: "Yogurt",
+        value: dislikeComponent
+      }
+    ];
+
+
     return (
-
-        <Grid container direction="column" justify="center" alignItems="center">
-
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            sm={6}
-          >
-            <Grid item sm={2}>
-              <Avatar
-                alt="eatable"
-                className={classNames(classes.avatar, classes.bigAvatar)}
-              >
-                <UserIcon />
-              </Avatar>
+      <Grid container xs={12} direction="column" alignItems="center">
+        <Grid
+          container={true}
+          justify="flex-start"
+          xs={11}
+          style={{ padding: "20px", paddingBottom: "0px", align: "left" }}
+        >
+          <Typography variant={"h6"} align="left">
+            {" "}
+            Profile Details{" "}
+          </Typography>
+          <Paper style={{ backgroundColor: "lightGrey"}}>
+            <Grid container direction="row" alignItems="center" xs={12}>
+              <Grid item sm={2}>
+                <Avatar
+                  alt="avatar"
+                  src={avatarImage}
+                  className={classNames(classes.avatar, classes.bigAvatar)}
+                />
+              </Grid>
+              <Grid item sm={6} style={{ marginRight: "35px"}}  >
+                <Typography> Hello, Friend! </Typography>
+                <Typography>Welcome back to your profile!</Typography>
+              </Grid>
             </Grid>
-            <Grid item sm={4}>
-              <Typography> Hello, name</Typography>
-              <Typography>Welcome back!</Typography>
-            </Grid>
-          </Grid>
-          {/* <ProfileTabs /> */}
-          <Typography variant={"h6"}> Profile Details </Typography>
-      
-          <Paper classes={{rounded: classes.rounded}} elevation={10} square={false}>
-
-          
-          <Grid>
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>
-                My Preferences
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Grid container={true} direction="column">
-                <Typography>
-                  <List>
-                    {linkText.map((text, index) => (
-                      <ListItem
-                        button
-                        component="a"
-                        key={text}
-                        href={links[index]}
-                      >
-                        <ListItemText primary={text} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Typography>
-                <br />
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  href="/preferences"
-                  className={classes.button}
-                >
-                  Update my preferences
-                </Button>
-              </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-         
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>Saved Baskets</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Grid container={true} direction="column">
-                <Typography> Here is a list of your saved baskets</Typography>
-                <br />
-              </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>Favourites</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Grid container={true} direction="column">
-                <Typography>
-                  <List>
-                    {linkText.map((text, index) => (
-                      <ListItem
-                        button
-                        component="a"
-                        key={text}
-                        href={links[index]}
-                      >
-                        <ListItemIcon>
-                          {index % 2 === 0 ? <ThumbDown /> : <ThumbUp />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Typography>
-                <br />
-              </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>About Me</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Grid container={true} direction="column">
-                <Typography>
-                  {" "}
-                  Let us know more about you so we can personalize your
-                  experience
-                </Typography>
-                <br />
-              </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-
-         </Grid>
           </Paper>
-
         </Grid>
 
+        <Paper
+          classes={{ rounded: classes.rounded }}
+          elevation={10}
+          square={false}
+        >
+          <Grid>
+            <ExpansionPanel defaultExpanded={true}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.heading}>
+                  My Preferences
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Grid container={true} direction="column">
+                  <div>
+                    <Table className={classes.table}>
+                      {/* <TableHead>
+                        <TableRow>
+                          <TableCell>Category</TableCell>
+                          <TableCell align="right">Value</TableCell>
+                        </TableRow>
+                      </TableHead> */}
+                      <TableBody>
+                        {rows.map(row => (
+                          <TableRow key={row.id}>
+                            <TableCell component="th" scope="row">
+                              {row.name}
+                            </TableCell>
+                            <TableCell align="right">{row.value}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                  <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography className={classes.heading}>
+                        Favourites
+                      </Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                    <Grid container={true} direction="column">
+                        <div>
+                          <Table className={classes.table}>
+                            <TableBody>
+                              {favouritesRows.map(row => (
+                                <TableRow key={row.id}>
+                                  <TableCell component="th" scope="row">
+                                    {row.name}
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    {row.value}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      </Grid>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+
+                  <ExpansionPanel defaultExpanded={true}>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography className={classes.heading}>
+                        About Me
+                      </Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Grid container={true} direction="column">
+                        <div>
+                          <Table className={classes.table}>
+                            <TableBody>
+                              {aboutMeRows.map(row => (
+                                <TableRow key={row.id}>
+                                  <TableCell component="th" scope="row">
+                                    {row.name}
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    {row.value}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      </Grid>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href="/preferences"
+                    className={classes.button}
+                  >
+                    Update my preferences
+                  </Button>
+                </Grid>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+
+            <ExpansionPanel>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.heading}>
+                  Saved Baskets
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Grid container={true} direction="column">
+                  <Typography> Here is a list of your saved baskets</Typography>
+                  <br />
+                </Grid>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </Grid>
+        </Paper>
+      </Grid>
     );
   }
 }

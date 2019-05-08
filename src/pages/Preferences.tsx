@@ -30,7 +30,9 @@ const styles = (theme: Theme) => ({
     height: 160
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit * 3,
+    padding: theme.spacing.unit 
+
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -69,30 +71,40 @@ class Preferences extends Component<IPreferencesProps, { invisible: boolean }> {
     ];
 
     return (
-      <Paper>
+      <Grid container direction="column" justify="center" alignItems="center">
         <Grid
           container
-          direction="column"
+          direction="row"
           justify="center"
-          xs={12}
           alignItems="center"
-          alignContent="center"
+          sm={6}
         >
-          <Grid item={true} justify="flex-start" xs={11}>
+          <Grid item={true} justify="flex-start" xs={11} style={{padding: "20px"}}>
             <Typography variant="h6" color="inherit">
-              Preferences
+             My Preferences
             </Typography>
             <Typography color="inherit">
               Choose which preferences you would like to set to help us
               customize your basket
             </Typography>
           </Grid>
-          <br />
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>Budget</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+        </Grid>
+
+       
+          <Grid container style={{paddingRight: "20px", paddingLeft: "20px"}}>
+          <Paper
+          classes={{ rounded: classes.rounded }}
+          elevation={10}
+          square={false}
+          
+        >
+            <ExpansionPanel defaultExpanded={true}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.heading}>
+                  Budget
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
               <Grid container={true} direction="column">
                 What is your average spend per week?
                 <NativeSelect
@@ -107,14 +119,14 @@ class Preferences extends Component<IPreferencesProps, { invisible: boolean }> {
                   <option value={30}>Over $100</option>
                 </NativeSelect>
               </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          {/* Add switch controls to modify the form and update what type of preferences the user wants to set */}
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>Favourites</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+
+            <ExpansionPanel defaultExpanded={true}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.heading}>Favourites</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
               <Grid container={true} direction="column">
                 <Typography>
                   {" "}
@@ -137,51 +149,13 @@ class Preferences extends Component<IPreferencesProps, { invisible: boolean }> {
                   isMulti={true}
                 />
               </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>
-                Dietary Restriction
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Grid container={true} direction="column">
-                <Typography>
-                  We know some of the common dietary restrictions, but if you
-                  add a restricted item to your favourites - we will consider it
-                </Typography>
-                <br />
-
-                <Typography>Type of Diet</Typography>
-                <Select options={dietOptions} isMulti={true} />
-                <br />
-                <FormGroup row>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        color="primary"
-                        checked={!invisible}
-                        onChange={this.handleBadgeVisibility}
-                      />
-                    }
-                    label="Allergies"
-                  />
-                  {this.state.invisible && (
-                    <Grid item={true} xs={10}>
-                      <Select options={options} isMulti={true} />
-                    </Grid>
-                  )}
-                </FormGroup>
-              </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>About Me</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.heading}> About me</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
               <Grid container={true} direction="column">
                 <Typography>
                   {" "}
@@ -222,10 +196,45 @@ class Preferences extends Component<IPreferencesProps, { invisible: boolean }> {
                   margin="normal"
                 />
               </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+                 </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.heading}> Dietary Restriction</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <Grid container={true} direction="column">
+                <Typography>
+                  We know some of the common dietary restrictions, but if you
+                  add a restricted item to your favourites - we will consider it
+                </Typography>
+                <br />
 
-          <ExpansionPanel>
+                <Typography>Type of Diet</Typography>
+                <Select options={dietOptions} isMulti={true} />
+                <br />
+                <FormGroup row>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        color="primary"
+                        checked={!invisible}
+                        onChange={this.handleBadgeVisibility}
+                      />
+                    }
+                    label="Allergies"
+                  />
+                  {this.state.invisible && (
+                    <Grid item={true} xs={10}>
+                      <Select options={options} isMulti={true} />
+                    </Grid>
+                  )}
+                </FormGroup>
+              </Grid>
+                 </ExpansionPanelDetails>
+            </ExpansionPanel>
+
+            <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <Typography className={classes.heading}>
                 Your saved Baskets
@@ -241,8 +250,9 @@ class Preferences extends Component<IPreferencesProps, { invisible: boolean }> {
               </Grid>
             </ExpansionPanelDetails>
           </ExpansionPanel>
-
-          <Button
+        </Paper>
+          </Grid>
+        <Button
             variant="contained"
             color="primary"
             href="/basket"
@@ -250,8 +260,7 @@ class Preferences extends Component<IPreferencesProps, { invisible: boolean }> {
           >
             Save and View Basket
           </Button>
-        </Grid>
-      </Paper>
+      </Grid>
     );
   }
 }
