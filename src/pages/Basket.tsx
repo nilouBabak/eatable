@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 
 interface IBasketProps {
 }
@@ -35,6 +36,7 @@ class Basket extends Component<IBasketProps, IBasketState>{
     return(
       <div className="basket-container">
         <h2 className="basket-page-title">Hey There! Discover Your Unique Basket By Choosing a Category Below</h2>
+        <Grid container direction="column" justify="center" alignItems="center">
         <div className="food-guide">
           {
             Object.values(FoodGuideCategories).map((values) => {
@@ -42,6 +44,7 @@ class Basket extends Component<IBasketProps, IBasketState>{
             })
           }
         </div>
+        </Grid>
         <div className="Or">
           <hr/> Or <hr/>
         </div>

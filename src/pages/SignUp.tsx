@@ -35,10 +35,13 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface ISignUpProps extends WithStyles {}
+interface ISignUpProps extends WithStyles {
+  state: any
+}
+
 class SignUp extends Component<ISignUpProps> {
   render() {
-    const {classes} = this.props;
+    const {classes, state} = this.props;
     return (
       <Paper classes={{rounded: classes.rounded}} elevation={20} square={false}>
         <Grid container direction="column" justify="center" alignItems="center">
@@ -56,6 +59,7 @@ class SignUp extends Component<ISignUpProps> {
             className={classes.textField}
             margin="normal"
             variant="outlined"
+            onChange={(e) => this.setState({...state, name: e.target.value}) }
           />
           <TextField
             id="outlined-name"
