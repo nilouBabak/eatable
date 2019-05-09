@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {WithStyles, withStyles} from '@material-ui/core';
 import '../pages/styles.scss';
+import heart from '../Assets/heart.png';
+import booger from '../Assets/booger.png';
 
 const styles = () => {
 
@@ -28,7 +30,13 @@ class FoodItem extends Component<IFoodItemProps, IFoodItemState> {
                 <div className="Items">
                     {
                         this.state.recomendedOptions.map((values)=> {
-                            return <a>{values}</a>
+                            return <div className="foodItems">
+                                        <a>{values}</a>
+                                        <div className="icons">
+                                            <a className="heart"><img src={heart} height="35px" width="35px"/></a>
+                                            <a className="booger"><img src={booger} height="35px" width="35px"/></a>
+                                        </div>
+                                </div>
                         })
                     }
                 </div>

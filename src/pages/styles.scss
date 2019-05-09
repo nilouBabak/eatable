@@ -6,7 +6,7 @@
     .basket-page-title {
         height: 44px;
         color: #1F355E;
-        font-family: fantasy;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
         font-size: 18px;
         line-height: 22px;
         text-align: center;
@@ -17,7 +17,7 @@
         flex-direction: row;
         margin-top: 40px;
         color: #1F355E;
-        font-family: fantasy;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
         font-size: 18px;
         line-height: 22px;
         text-align: center;
@@ -38,15 +38,15 @@
         border-radius: 5px; 
         font-size: 15px;
         color: white;
-        background-color: #3f51b5;
+        background-color: #009688;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         align-self: center;
     }
     .food-guide {
         background-image: url(../Assets/canada-new-food-guide-2019.png);
         background-size: cover;
-        height: 373px;
-        width: 100%;
+        height: 300px;
+        width: 80%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         .categories {
@@ -60,7 +60,7 @@
 .ItemsPage {
     margin: 20px;
     margin-top: 40px;
-    font-family: fantasy;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     color: #1F355E;
     > h1 {
         text-align: center;
@@ -72,5 +72,19 @@
         font-size: 21px;
         margin: 20px;
         color: midnightblue;
+    }
+    .foodItems {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .icons{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: flex-end;
+            .heart{
+                margin-right: 10px;
+            }
+        }
     }
 }

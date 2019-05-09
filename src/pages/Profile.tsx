@@ -63,7 +63,7 @@ class Profile extends Component<IProfileProps> {
     }
 
     const rows = [
-      createData("Budget", "25-50"),
+      createData("Budget", "$25-$50"),
       createData("Type of Diet", "Ketogenic"),
       createData("Allergies", "None")
       // createData("Likes", "Strawberry, Strawberry, Strawberry "),

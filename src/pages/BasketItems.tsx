@@ -11,6 +11,10 @@ interface IBasketItemsState {
     category: string
     recomendedOptions: any
     viewAll: boolean
+    proteins: string[]
+    vegetables: string[]
+    fruits: string[]
+    grains: string[]
 }
 interface IBasketItemsProps extends WithStyles {
     location: any
@@ -19,7 +23,11 @@ class BasketItems extends Component<IBasketItemsProps, IBasketItemsState> {
     state = {
         category: this.props.location.category,
         viewAll: this.props.location.viewAll,
-        recomendedOptions: []
+        recomendedOptions: [],
+        vegetables : ['Artichoke', 'Cabbage', 'Asparagus', 'Aubergine', 'Beetroot'],
+        fruits: ['Melon', 'Raspberry', 'Mango', 'Orange', 'Avacado'],
+        grains: ['Farro', 'Amaranth', 'Teff', 'Bulgur', 'Spelt'],
+        proteins: ['Tofu', 'Egg', 'Quinoa', 'Almond', 'Turkey']
     };
 
     /*constructor(props: IBasketItemsProps) {
@@ -40,13 +48,27 @@ class BasketItems extends Component<IBasketItemsProps, IBasketItemsState> {
         } 
         return(
             <div>
-            {
-                Object.values(FoodGuideCategories).map((value) => {
+                {
+                /*Object.values(FoodGuideCategories).map((value) => {
                     return <FoodItem category={value}
                     recomendedOptions={this.state.recomendedOptions}
                     ></FoodItem>
-                })
+                }) */
             }
+                
+                <FoodItem category='Vegetables'
+                    recomendedOptions={this.state.vegetables}
+                ></FoodItem>
+                <FoodItem category='Fruits'
+                    recomendedOptions={this.state.fruits}
+                ></FoodItem>
+                <FoodItem category='Grains'
+                    recomendedOptions={this.state.grains}
+                ></FoodItem>
+                <FoodItem category='Proteins'
+                    recomendedOptions={this.state.proteins}
+                ></FoodItem>
+            
             </div>
         )
     }
