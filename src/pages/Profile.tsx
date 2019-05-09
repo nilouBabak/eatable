@@ -20,9 +20,12 @@ import "./styles.scss";
 import classNames from "classnames";
 import UserIcon from "@material-ui/icons/AccountCircle";
 import avatarImage from "./../images/avatar.png"
-import ThumbDown from "@material-ui/icons/ThumbDownRounded";
-import ThumbUp from "@material-ui/icons/ThumbUpRounded";
+// import ThumbDown from "@material-ui/icons/ThumbDownRounded";
+// import ThumbUp from "@material-ui/icons/ThumbUpRounded";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+import heart from '../Assets/heart.png';
+import booger from '../Assets/booger.png';
 
 const styles = (theme: Theme) => ({
   avatar: {
@@ -33,7 +36,8 @@ const styles = (theme: Theme) => ({
     height: 60
   },
   smallAvatar: {
-    marginRight: -300
+    width: 25,
+    height: 25
   },
   button: {
     margin: theme.spacing.unit
@@ -53,8 +57,8 @@ class Profile extends Component<IProfileProps> {
   render() {
     const { classes } = this.props;
 
-    const likeComponent = <ThumbUp />;
-    const dislikeComponent = <ThumbDown />;
+    const likeComponent =     <Avatar alt="avatar" src={heart} className={classNames(classes.smallAvatar)}/>    ;
+    const dislikeComponent =     <Avatar alt="avatar" src={booger} className={classNames(classes.smallAvatar)}/>    ;
 
     let id = 0;
     function createData(name: string, value: string) {
@@ -75,7 +79,7 @@ class Profile extends Component<IProfileProps> {
         id: "5",
         name: "Avatar",
         value: (
-          <Avatar alt="avatar" src={avatarImage} className={classNames(classes.smallAvatar)}/>
+          <Avatar alt="avatar" src={avatarImage}/>
         )
       },
       {

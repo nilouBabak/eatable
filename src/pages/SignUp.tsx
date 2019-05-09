@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import './styles.scss';
 import classNames from 'classnames';
-import CrockPot from '../images/crock-pot.png';
+import CrockPot from '../Assets/Logo.png';
 
 const styles = (theme: Theme) => ({
   avatar: {
@@ -20,7 +20,8 @@ const styles = (theme: Theme) => ({
   },
   bigAvatar: {
     width: 160,
-    height: 160,
+    height: 120,
+    padding: "30px",
   },
   button: {
     margin: theme.spacing.unit,
@@ -60,6 +61,7 @@ class SignUp extends Component<ISignUpProps> {
             margin="normal"
             variant="outlined"
             onChange={(e) => this.setState({...state, name: e.target.value}) }
+          value="Sarah"
           />
           <TextField
             id="outlined-name"
@@ -68,6 +70,7 @@ class SignUp extends Component<ISignUpProps> {
             type="password"
             margin="normal"
             variant="outlined"
+            value="password"
           />
           <Button
             variant="contained"
