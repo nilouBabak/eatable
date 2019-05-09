@@ -27,7 +27,7 @@ class App extends Component {
         <div>
           {/* TODO: Render a different version of the user app bar when the user is not logged in */}
           <MenuAppBar> </MenuAppBar>
-          {/* <Route exact path="/" component={() => <SignUp props={state}/>} /> */}
+          <Route exact path="/" component={SignUp} />
           <Route path="/profile" component={Profile}></Route>
           <Route path="/preferences" component={Preferences} />
           <Route path="/basket-items" component={BasketItems} />
