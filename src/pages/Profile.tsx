@@ -85,7 +85,7 @@ class Profile extends Component<IProfileProps> {
       {
         id: "1",
         name: "Name",
-        value: "Friend"
+        value: "Sarah"
       },
       {
         id: "2",
@@ -100,7 +100,7 @@ class Profile extends Component<IProfileProps> {
       {
         id: "4",
         name: "Weight",
-        value: "170"
+        value: "170 lbs"
       }
     ];
 
@@ -150,7 +150,7 @@ class Profile extends Component<IProfileProps> {
                 />
               </Grid>
               <Grid item sm={6} style={{ marginRight: "35px"}}  >
-                <Typography> Hello, Friend! </Typography>
+                <Typography> Hello, Sarah! </Typography>
                 <Typography>Welcome back to your profile!</Typography>
               </Grid>
             </Grid>
