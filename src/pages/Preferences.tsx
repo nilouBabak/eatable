@@ -43,10 +43,13 @@ const styles = (theme: Theme) => ({
   }
 });
 
+interface IPreferencesState  { 
+  invisible: boolean,
+ }
 interface IPreferencesProps extends WithStyles {}
-class Preferences extends Component<IPreferencesProps, { invisible: boolean }> {
+class Preferences extends Component<IPreferencesProps,IPreferencesState> {
   state = {
-    invisible: false
+    invisible: false,
   };
 
   handleBadgeVisibility = () => {
@@ -69,7 +72,6 @@ class Preferences extends Component<IPreferencesProps, { invisible: boolean }> {
       { value: "keto", label: "Ketogenic" },
       { value: "paleolithic", label: "Paleolithic" }
     ];
-
     return (
       <Grid container direction="column" justify="center" alignItems="center">
         <Grid
