@@ -45,11 +45,13 @@ const styles = (theme: Theme) => ({
 
 interface IPreferencesState  { 
   invisible: boolean,
+  budget: number
  }
 interface IPreferencesProps extends WithStyles {}
 class Preferences extends Component<IPreferencesProps,IPreferencesState> {
   state = {
     invisible: false,
+    budget: 25
   };
 
   handleBadgeVisibility = () => {
@@ -57,7 +59,7 @@ class Preferences extends Component<IPreferencesProps,IPreferencesState> {
   };
   render() {
     const { classes } = this.props;
-    const { invisible } = this.state;
+    const { invisible, budget } = this.state;
 
     const options = [
       { value: "chocolate", label: "Chocolate" },
