@@ -22,16 +22,18 @@ const styles = (theme: Theme) => ({
     width: 160,
     height: 120,
     padding: "30px",
+    paddingBottom: "15px"
   },
   button: {
-    margin: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 3
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
   },
   rounded: {
-    borderRadius: "200px 200px 0 0",
+    borderRadius: "200px 200px 40px 40px",
     margin: theme.spacing.unit * 4
   }
 });
@@ -44,7 +46,7 @@ class SignUp extends Component<ISignUpProps> {
   render() {
     const {classes, state} = this.props;
     return (
-      <Paper classes={{rounded: classes.rounded}} elevation={20} square={false}>
+      <Paper classes={{rounded: classes.rounded}} elevation={4} square={false}>
         <Grid container direction="column" justify="center" alignItems="center">
           {' '}
           <Avatar
@@ -52,8 +54,8 @@ class SignUp extends Component<ISignUpProps> {
             src={CrockPot}
             className={classNames(classes.avatar, classes.bigAvatar)}
           />
-          <Typography> eatable</Typography>
-          <Typography> healthy dining on a dollar</Typography>
+          <Typography variant="h6"> eatable</Typography>
+          <Typography variant="subtitle2"> healthy dining on a dollar</Typography>
           <TextField
             id="outlined-name"
             label="Name"
