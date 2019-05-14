@@ -232,14 +232,28 @@ class Profile extends Component<IProfileProps, IProfileState> {
                 <Grid container={true} direction="column">
                   <Table className={classes.table}>
                     <TableBody>
-                      {rows.map(row => (
-                        <TableRow key={row.id}>
-                          <TableCell component="th" scope="row">
-                            {row.name}
-                          </TableCell>
-                          <TableCell align="right">{row.value}</TableCell>
-                        </TableRow>
-                      ))}
+                      <AppContextConsumer>
+                        {appContext =>
+                          appContext &&
+                          Object.entries(appContext.preferences).map(row => {
+                           console.log(row[0], "row0")
+                           console.log(row[1], "row1")
+                            if (
+                              typeof row[1] === "string" ||
+                              typeof row[1] === "number"
+                            ) {
+                              return (
+                                <TableRow key={row[0]}>
+                                  <TableCell component="th" scope="row">
+                                    {row[1].toString}
+                                  </TableCell>
+                                  <TableCell align="right">{row[1]}</TableCell>
+                                </TableRow>
+                              );
+                            }
+                          })
+                        }
+                      </AppContextConsumer>
                     </TableBody>
                   </Table>
                   <ExpansionPanel>
