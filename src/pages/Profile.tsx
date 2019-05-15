@@ -205,7 +205,7 @@ class Profile extends Component<IProfileProps, IProfileState> {
                   {appContext =>
                     appContext && (
                       <Typography>
-                        Hello {appContext.preferences.budget}!
+                        Hello {appContext.personalInfo.name}!
                       </Typography>
                     )
                   }

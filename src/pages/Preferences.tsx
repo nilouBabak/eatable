@@ -75,8 +75,15 @@ class Preferences extends Component<IPreferencesProps,IPreferencesState> {
       { value: "vegan", label: "Vegan" },
       { value: "vegetarian", label: "Vegetarian" },
       { value: "pescatarian", label: "Pescatarian" },
+      { value: "glutenfree", label: "Gluten Free" },
       { value: "keto", label: "Ketogenic" },
       { value: "paleolithic", label: "Paleolithic" }
+    ];
+
+    const allergyOptions = [
+      { value: "chocolate", label: "Banana" },
+      { value: "strawberry", label: "Shellfish" },
+      { value: "vanilla", label: "Gluten" }
     ];
     return (
       <Grid container direction="column" justify="center" alignItems="center">
@@ -115,17 +122,32 @@ class Preferences extends Component<IPreferencesProps,IPreferencesState> {
               <ExpansionPanelDetails>
               <Grid container={true} direction="column">
                 What is your average spend per week?
+
+                <AppContextConsumer>
+                  {cont =>
+                    cont && (
                 <NativeSelect
-                  value="{this.state.age}"
-                  onChange={() => console.log("this.handleChange('age')")}
-                  input={<Input name="age" id="age-native-label-placeholder" />}
+                  value={cont.preferences.budget}
+                  onChange={(e) => {
+                  console.log(e.target.value, "my E");
+                  console.log(value, "my val");
+
+                  cont.update("budget", e.target.value, "pref")
+                }}
+                inputProps={{
+                  name: 'budget',
+                  id: 'age-native-simple',
+                }}
+                  input={<Input name="budget" id="age-native-label-placeholder" />}
                 >
-                  <option value={10}>Less than $25</option>
-                  <option value={20}>$25 - $50</option>
-                  <option value={30}>$50 - $100</option>
-                  <option value={30}>$50 - $75</option>
-                  <option value={30}>Over $100</option>
+                  <option value={25}>Less than $25</option>
+                  <option value={50}>$25 - $50</option>
+                  <option value={75}>$50 - $75</option>
+                  <option value={100}>$75 - $100</option>
+                  <option value={150}>$100-$150</option>
                 </NativeSelect>
+                    )}
+                    </AppContextConsumer>
               </Grid>
               </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -227,14 +249,14 @@ class Preferences extends Component<IPreferencesProps,IPreferencesState> {
                 <br />
 
                 <Typography>Type of Diet</Typography>
-                <Select options={dietOptions} isMulti={true} />
+                <Select options={allergyOptions} isMulti={true} />
                 <br />
                 <FormGroup row>
                   <FormControlLabel
                     control={
                       <Switch
                         color="primary"
-                        checked={!invisible}
+                        checked={invisible}
                         onChange={this.handleBadgeVisibility}
                       />
                     }

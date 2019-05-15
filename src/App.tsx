@@ -26,7 +26,7 @@ class App extends Component<any, any> {
     super(props);
     this.state = {
       preferences: {
-        budget: "fuck this",
+        budget: 0,
         dietType: "",
         allergies: [],
         favourites: {
@@ -36,9 +36,9 @@ class App extends Component<any, any> {
       },
       personalInfo: {
         name: "Alisa yo",
-        age: "21",
+        age: "32",
         weight: "160",
-        height: "180"
+        height: "5'10"
       }
     };
   }
