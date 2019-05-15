@@ -32,44 +32,31 @@ class App extends Component<any, any> {
         favourites: {
           likes: [],
           dislikes: []
-        },
-        personalInfo: {
-          name: "Alisa yo",
-          age: 0,
-          weight: 0,
-          height: 0
         }
+      },
+      personalInfo: {
+        name: "Alisa yo",
+        age: "21",
+        weight: "160",
+        height: "180"
       }
     };
-
-    // this.state = {
-    //   preferences: {
-    //     budget: "you",
-    //     dietType: "",
-    //     allergies: [],
-    //     favourites: {
-    //       likes: [],
-    //       dislikes: []
-    //     },
-    //     personalInfo: {
-    //       name: "Alisa yo",
-    //       age: 0,
-    //       weight: 0,
-    //       height: 0
-    //     }
-    //   },
-    //   update:this.update
-    //   }
   }
-  update = (preference: string, newPreference: string) => {
-    console.log("trying");
-    console.log(preference, "preference");
-    console.log(newPreference, "NEW value for preference");
-    // this.setState(prevState => ({...prevState, [preference]: newPreference}));
+  update = (key: string, newPreference: string, type:string) => {
+    console.log(type, "type")
+    console.log(key, "key")
+    if(type === "pers") {
+      this.setState((prevState: any) => ({
+        ...prevState,
+        personalInfo: {...prevState.personalInfo, [key]: newPreference}
+      }));   
+    }
+    if(type === "pref") {
     this.setState((prevState: any) => ({
       ...prevState,
-      preferences: { ...prevState.preferences, budget: "fyck" }
+      preferences: { ...prevState.preferences, [key]: newPreference },
     }));
+  } 
   };
 
   render() {

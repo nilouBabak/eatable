@@ -177,39 +177,34 @@ class Preferences extends Component<IPreferencesProps,IPreferencesState> {
                       <>
                       <TextField
                       id="standard-name"
-                      label="Name"
+                      label="User Name"
                       className={classes.textField}
-                      value={cont.preferences.personalInfo.name}
-                    //   onChange={(e)=> {
-                    //     console.log(value)
-                    //   value.preferences.personalInfo.name = e.target.value
-                    // }
-                    //   }
-                      onChange={() => cont.update("preferences.personalInfo.name", "ughh worki")}
+                      value={cont.personalInfo.name}
+                      onChange={(e) => { cont.update("name", e.target.value, "pers")}}
                       margin="normal"
                     />
                     <TextField
                       id="standard-name"
                       label="Age"
                       className={classes.textField}
-                      value={cont.preferences.budget}                      
-                      onChange={() => console.log("this.handleChange('name')")}
+                      value={cont.personalInfo.age}                      
+                      onChange={(e) => { cont.update("age", e.target.value, "pers")}}
                       margin="normal"
                     />
                     <TextField
                       id="standard-name"
                       label="Height"
                       className={classes.textField}
-                      value={cont.preferences.personalInfo.height}
-                      onChange={() => console.log("this.handleChange('name')")}
+                      value={cont.personalInfo.height}
+                      onChange={(e) => { cont.update("height", e.target.value, "pers")}}
                       margin="normal"
                     />
                     <TextField
                       id="standard-name"
                       label="Weight"
                       className={classes.textField}
-                      value={cont.preferences.personalInfo.weight}
-                      onChange={() => console.log("this.handleChange('name')")}
+                      value={cont.personalInfo.weight}
+                      onChange={(e) => { cont.update("weight", e.target.value, "pers")}}
                       margin="normal"
                     />
                     </>
