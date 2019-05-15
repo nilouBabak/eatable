@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import {
   Typography,
   Paper,
@@ -20,6 +20,7 @@ import {
 import "./styles.scss";
 import Select from "react-select";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { AppContextConsumer, AppContext, AppContextInterface, AppContextProvider } from "./../components/AppContext";
 
 const styles = (theme: Theme) => ({
   avatar: {
@@ -45,21 +46,24 @@ const styles = (theme: Theme) => ({
 
 interface IPreferencesState  { 
   invisible: boolean,
-  budget: number
+  budget: number,
  }
 interface IPreferencesProps extends WithStyles {}
 class Preferences extends Component<IPreferencesProps,IPreferencesState> {
   state = {
     invisible: false,
-    budget: 25
+    budget: 25,
+
   };
 
   handleBadgeVisibility = () => {
     this.setState(prevState => ({ invisible: !prevState.invisible }));
   };
+  
   render() {
     const { classes } = this.props;
     const { invisible, budget } = this.state;
+    let value = this.context;
 
     const options = [
       { value: "chocolate", label: "Chocolate" },
@@ -167,38 +171,51 @@ class Preferences extends Component<IPreferencesProps,IPreferencesState> {
                   experience
                 </Typography>
                 <br />
-                <TextField
-                  id="standard-name"
-                  label="Name"
-                  className={classes.textField}
-                  value={"this.state.name"}
-                  onChange={() => console.log("this.handleChange('name')")}
-                  margin="normal"
-                />
-                <TextField
-                  id="standard-name"
-                  label="Age"
-                  className={classes.textField}
-                  value={"this.state.name"}
-                  onChange={() => console.log("this.handleChange('name')")}
-                  margin="normal"
-                />
-                <TextField
-                  id="standard-name"
-                  label="Height"
-                  className={classes.textField}
-                  value={"this.state.name"}
-                  onChange={() => console.log("this.handleChange('name')")}
-                  margin="normal"
-                />
-                <TextField
-                  id="standard-name"
-                  label="Weight"
-                  className={classes.textField}
-                  value={"this.state.name"}
-                  onChange={() => console.log("this.handleChange('name')")}
-                  margin="normal"
-                />
+                <AppContextConsumer>
+                  {cont =>
+                    cont && (
+                      <>
+                      <TextField
+                      id="standard-name"
+                      label="Name"
+                      className={classes.textField}
+                      value={cont.preferences.personalInfo.name}
+                    //   onChange={(e)=> {
+                    //     console.log(value)
+                    //   value.preferences.personalInfo.name = e.target.value
+                    // }
+                    //   }
+                      onChange={() => cont.update("preferences.personalInfo.name", "ughh worki")}
+                      margin="normal"
+                    />
+                    <TextField
+                      id="standard-name"
+                      label="Age"
+                      className={classes.textField}
+                      value={cont.preferences.budget}                      
+                      onChange={() => console.log("this.handleChange('name')")}
+                      margin="normal"
+                    />
+                    <TextField
+                      id="standard-name"
+                      label="Height"
+                      className={classes.textField}
+                      value={cont.preferences.personalInfo.height}
+                      onChange={() => console.log("this.handleChange('name')")}
+                      margin="normal"
+                    />
+                    <TextField
+                      id="standard-name"
+                      label="Weight"
+                      className={classes.textField}
+                      value={cont.preferences.personalInfo.weight}
+                      onChange={() => console.log("this.handleChange('name')")}
+                      margin="normal"
+                    />
+                    </>
+                    )
+                  }
+                </AppContextConsumer>
               </Grid>
                  </ExpansionPanelDetails>
             </ExpansionPanel>

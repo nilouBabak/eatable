@@ -13,8 +13,8 @@ interface IFavouritesObject {
     height: number
   }
   
-  interface IPreferenceState {
-    budget: number,
+  export interface IPreferenceState {
+    budget: string,
     dietType: string,
     allergies: string[],
     favourites: IFavouritesObject,
@@ -22,8 +22,8 @@ interface IFavouritesObject {
   }
   
   export interface AppContextInterface {
-    preferences: IPreferenceState,
-  
+    preferences: any,
+    update: () => void;//(preference:string, newPreference: string) => void;
   }
   
 
@@ -40,8 +40,10 @@ interface IFavouritesObject {
 
 
 
-const ctxt = React.createContext<AppContextInterface | null>(null);
+const ctxt = React.createContext<any | null>(null);
 
 export const AppContextProvider = ctxt.Provider;
   
 export const AppContextConsumer = ctxt.Consumer;
+
+export const AppContext = ctxt;
