@@ -2,15 +2,17 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    padding: 15px;
 
     .basket-page-title {
         height: 44px;
         color: #1F355E;
         font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 22px;
         text-align: center;
-        padding: 40px;
+        padding: 10px;
+        margin: 0px;
     }
     .Or {
         display: flex;
@@ -45,8 +47,9 @@
     .food-guide {
         background-image: url(../Assets/canada-new-food-guide-2019.png);
         background-size: cover;
-        height: 300px;
-        width: 80%;
+        height: 200px;
+        width: 200px;
+        margin-bottom: 15px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         .categories {
@@ -54,6 +57,16 @@
                 background-color: rgba(0, 0, 0, 0.1);
             }
         }
+    }
+    .basketInfo {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .nutritional-info {
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 20px;
     }
 }
 
@@ -84,6 +97,9 @@
             justify-content: flex-end;
             .heart{
                 margin-right: 10px;
+                &:hover, &:focus{
+                    background-color: rgba(0, 0, 0, 0.1);
+                }
             }
         }
     }
