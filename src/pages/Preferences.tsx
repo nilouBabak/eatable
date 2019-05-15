@@ -273,7 +273,7 @@ class Preferences extends Component<any, IPreferencesState> {
                   <br />
 
                   <Typography>Type of Diet</Typography>
-                  <Select options={allergyOptions} isMulti={true} />
+                  <Select options={dietOptions} isMulti={true} />
                   <br />
                   <FormGroup row>
                     <FormControlLabel
@@ -288,7 +288,7 @@ class Preferences extends Component<any, IPreferencesState> {
                     />
                     {this.state.invisible && (
                       <Grid item={true} xs={10}>
-                        <Select options={options} isMulti={true} />
+                        <Select options={allergyOptions} isMulti={true} />
                       </Grid>
                     )}
                   </FormGroup>
