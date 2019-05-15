@@ -1,17 +1,22 @@
-import React from 'react';
-import classNames from 'classnames';
-import {withStyles, WithStyles, Theme} from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import InboxIcon from '@material-ui/icons/Inbox';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import React from "react";
+import classNames from "classnames";
+import { withStyles, WithStyles, Theme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import BasketIcon from "@material-ui/icons/ShoppingBasket";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import InboxIcon from "@material-ui/icons/Inbox";
+import MailIcon from "@material-ui/icons/Mail";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import basketImg from "./../images/basketImage.png";
+import {withRouter} from 'react-router-dom'
+import { Route, Redirect } from 'react-router'
+
 import {
   Drawer,
   Divider,
@@ -19,40 +24,41 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from '@material-ui/core';
-
-const linkText = ['Profile', 'Quick Preferences', 'Your Basket', 'Log out'];
-const links = ['/profile', '/preferences', '/basket', '/'];
+  Avatar
+} from "@material-ui/core";
+// import { RouterLink } from "react-router-dom";
+const linkText = ["Profile", "Quick Preferences", "Your Basket", "Log out"];
+const links = ["/profile", "/preferences", "/basket", "/"];
 // const linkIcons =
 
 const styles = (theme: Theme) => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 20,
+    marginRight: 20
   },
   hide: {
-    display: 'none',
+    display: "none"
   },
   drawer: {
     width: 240,
-    flexShrink: 0,
+    flexShrink: 0
   },
   drawerPaper: {
-    width: 240,
+    width: 240
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
+    display: "flex",
+    alignItems: "center",
+    padding: "0 8px",
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
+    justifyContent: "flex-end"
+  }
 });
 
 interface IMenuAppBarProps extends WithStyles {}
@@ -63,38 +69,38 @@ interface IMenuAppBarState {
   open: boolean;
 }
 
-class MenuAppBar extends React.Component<IMenuAppBarProps, IMenuAppBarState> {
+class MenuAppBar extends React.Component<any, IMenuAppBarState> {
   state = {
     auth: true,
     anchorEl: null,
-    open: false,
+    open: false
   };
 
   handleDrawerOpen = () => {
-    this.setState({open: true});
+    this.setState({ open: true });
   };
 
   handleDrawerClose = () => {
-    this.setState({open: false});
+    this.setState({ open: false });
   };
 
-  handleChange = (event: {target: {checked: any}}) => {
-    this.setState({auth: event.target.checked});
+  handleChange = (event: { target: { checked: any } }) => {
+    this.setState({ auth: event.target.checked });
   };
 
-  handleMenu = (event: {currentTarget: any}) => {
-    this.setState({anchorEl: event.currentTarget});
+  handleMenu = (event: { currentTarget: any }) => {
+    this.setState({ anchorEl: event.currentTarget });
   };
 
   handleClose = () => {
-    this.setState({anchorEl: null});
+    this.setState({ anchorEl: null });
   };
 
   render() {
-    const {classes} = this.props;
-    const {auth, anchorEl} = this.state;
+    const { classes, history } = this.props;
+    const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
-
+    console.log(auth, "auth");
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -105,31 +111,35 @@ class MenuAppBar extends React.Component<IMenuAppBarProps, IMenuAppBarState> {
               onClick={this.handleDrawerOpen}
               className={classNames(classes.menuButton, open && classes.hide)}
             >
-              <MenuIcon />
+              <AccountCircle />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               eatable
             </Typography>
+
             {auth && (
               <div>
                 <IconButton
-                  aria-owns={open ? 'menu-appbar' : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
                   color="inherit"
+                  aria-label="Open drawer"
+                  onClick={()=> history.push("/basket")} 
+                  className={classNames(
+                    classes.menuButton,
+                    open && classes.hide
+                  )}
                 >
-                  <AccountCircle />
+                  <BasketIcon />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right"
                   }}
                   transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right"
                   }}
                   open={open}
                   onClose={this.handleClose}
@@ -147,7 +157,7 @@ class MenuAppBar extends React.Component<IMenuAppBarProps, IMenuAppBarState> {
           anchor="left"
           open={this.state.open}
           classes={{
-            paper: classes.drawerPaper,
+            paper: classes.drawerPaper
           }}
         >
           <div className={classes.drawerHeader}>
@@ -159,6 +169,7 @@ class MenuAppBar extends React.Component<IMenuAppBarProps, IMenuAppBarState> {
           <List>
             {linkText.map((text, index) => (
               <ListItem button component="a" key={text} href={links[index]}>
+                {/* <ListItem button component={MyLinks} key={text}> */}
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
@@ -173,4 +184,4 @@ class MenuAppBar extends React.Component<IMenuAppBarProps, IMenuAppBarState> {
   }
 }
 
-export default withStyles(styles)(MenuAppBar);
+export default withStyles(styles)(withRouter(MenuAppBar));

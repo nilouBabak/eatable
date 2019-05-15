@@ -42,41 +42,43 @@ class App extends Component<any, any> {
       }
     };
   }
-  update = (key: string, newPreference: string, type:string) => {
-    console.log(type, "type")
-    console.log(key, "key")
-    if(type === "pers") {
+  update = (key: string, newPreference: string, type: string) => {
+    console.log(type, "type");
+    console.log(key, "key");
+    if (type === "pers") {
       this.setState((prevState: any) => ({
         ...prevState,
-        personalInfo: {...prevState.personalInfo, [key]: newPreference}
-      }));   
+        personalInfo: { ...prevState.personalInfo, [key]: newPreference }
+      }));
     }
-    if(type === "pref") {
-    this.setState((prevState: any) => ({
-      ...prevState,
-      preferences: { ...prevState.preferences, [key]: newPreference },
-    }));
-  } 
+    if (type === "pref") {
+      this.setState((prevState: any) => ({
+        ...prevState,
+        preferences: { ...prevState.preferences, [key]: newPreference }
+      }));
+    }
   };
 
   render() {
     return (
+        <AppContextProvider
+          value={{ ...this.state, update: this.update.bind(this) }}
+        >
       <MuiThemeProvider theme={theme}>
-        <Router>
+
+          <Router>
             {/* TODO: Render a different version of the user app bar when the user is not logged in */}
             <MenuAppBar> </MenuAppBar>
-            <AppContextProvider
-              value={{ ...this.state, update: this.update.bind(this) }}
-            >
-              <Route exact path="/" component={SignUp} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/preferences" component={Preferences} />
-              <Route path="/basket-items" component={BasketItems} />
-              <Route path="/basket" component={Basket} />
-              <Route path="/item-details" component={ItemDetails} />
-            </AppContextProvider>
-        </Router>
+            <Route exact path="/" component={SignUp} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/preferences" component={Preferences} />
+            <Route path="/basket-items" component={BasketItems} />
+            <Route path="/basket" component={Basket} />
+            <Route path="/item-details" component={ItemDetails} />
+          </Router>
       </MuiThemeProvider>
+
+        </AppContextProvider>
     );
   }
 }

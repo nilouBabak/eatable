@@ -20,10 +20,11 @@ import "./styles.scss";
 import classNames from "classnames";
 import UserIcon from "@material-ui/icons/AccountCircle";
 import avatarImage from "./../images/avatar.png";
-import bI from "./../images/basketIcon.png";
+import basketImg from "./../images/basketImage.png";
 // import ThumbDown from "@material-ui/icons/ThumbDownRounded";
 // import ThumbUp from "@material-ui/icons/ThumbUpRounded";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import {withRouter} from 'react-router-dom'
 
 import heart from "../Assets/heart.png";
 import booger from "../Assets/booger.png";
@@ -78,7 +79,7 @@ interface IProfileState {
 }
 
 interface IProfileProps extends WithStyles {}
-class Profile extends Component<IProfileProps, IProfileState> {
+class Profile extends Component<any, IProfileState> {
   state = {
     preferences: {
       budget: 0,
@@ -180,11 +181,10 @@ class Profile extends Component<IProfileProps, IProfileState> {
       }
     ];
 
-
     const BasketIcon = (
       <Avatar
         alt="basketIcon"
-        src={bI}
+        src={basketImg}
         className={classNames(classes.smallAvatar)}
       />
     );
@@ -324,7 +324,7 @@ class Profile extends Component<IProfileProps, IProfileState> {
                   <Button
                     variant="contained"
                     color="primary"
-                    href="/preferences"
+                    onClick={() => this.props.history.push("/preferences")}
                     className={classes.button}
                   >
                     Update my preferences
@@ -341,7 +341,8 @@ class Profile extends Component<IProfileProps, IProfileState> {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Grid container={true} direction="column">
-                  <Typography> Click on a saved basket to view</Typography>&nbsp;
+                  <Typography> Click on a saved basket to view</Typography>
+                  &nbsp;
                   <Table className={classes.table}>
                     <TableBody>
                       {savedBasketRows.map(row => (

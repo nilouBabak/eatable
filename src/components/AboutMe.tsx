@@ -13,6 +13,7 @@ import {
 import "./styles.scss";
 import classNames from "classnames";
 import CrockPot from "../images/crock-pot.png";
+import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
   avatar: {
@@ -78,9 +79,9 @@ class AboutMe extends Component<IAboutMeProps> {
           <Button
             variant="contained"
             color="primary"
-            href="/profile"
             className={classes.button}
           >
+          <Link to="basket"/>
             Update
           </Button>
         </Grid>
