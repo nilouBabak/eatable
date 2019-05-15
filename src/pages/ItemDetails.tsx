@@ -41,6 +41,7 @@ const styles = {
 };
 class ItemDetails extends Component<IItemDetailsProps, IItemDetailsState> {
   state = {
+    item: this.props.location.item,
     category: this.props.location.category,
     viewAll: this.props.location.viewAll,
     recomendedOptions: [],
@@ -58,7 +59,7 @@ class ItemDetails extends Component<IItemDetailsProps, IItemDetailsState> {
   render() {
     const { classes } = this.props;
     return (
-      <Grid container direction="column" justify="center" alignItems="center">
+      <Grid container direction="column" justify="center" alignItems="center"  style={{ padding: 20 }}>
         <Grid
           container
           direction="row"
@@ -73,11 +74,11 @@ class ItemDetails extends Component<IItemDetailsProps, IItemDetailsState> {
             style={{ padding: "20px", paddingTop: "0px" }}
           >
             
-            <FoodItem category="Item Details"
-            recomendedOptions={["Peaches"]}
-            ></FoodItem>
+            <div style={{ fontWeight: 600,  fontSize: 17, marginBottom: 10}}>
+            {this.state.item}
+            </div>
             <Typography color="inherit">
-             To learn more about the item Peaches, take a look at the information below. You can like or dislike this item from this page.
+             Here are the nutritional facts of {this.state.item}:
             </Typography>
           </Grid>
         </Grid>

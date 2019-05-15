@@ -19,6 +19,7 @@ interface IBasketProps extends WithStyles {}{
 }
 
 interface IBasketState {
+  currentItem: string
   redirectToItems: boolean
   selectedCategory: string
   viewAll: boolean
@@ -27,6 +28,7 @@ interface IBasketState {
 
 class Basket extends Component<IBasketProps, IBasketState>{
   state = {
+    currentItem: '',
     redirectToItems: false,
     selectedCategory: '',
     viewAll: false,
@@ -34,6 +36,7 @@ class Basket extends Component<IBasketProps, IBasketState>{
     fruits: ['Melon', 'Raspberry', 'Mango', 'Orange', 'Avacado'],
     grains: ['Farro', 'Amaranth', 'Teff', 'Bulgur', 'Spelt'],
     proteins: ['Tofu', 'Egg', 'Quinoa', 'Almond', 'Turkey'],
+    basketNutrients: ['Calcium', 'Fiber', 'Magnesium', 'Potassium', 'Vitamin A', 'Vitamin C', 'Vitamin E'],
     expanded: null
   };
 
@@ -49,15 +52,18 @@ class Basket extends Component<IBasketProps, IBasketState>{
     });
   };
 
+  navigateToItems = (item: string) => {
+    this.setState({redirectToItems: true, currentItem: item});
+  }
+
   viewAllCategories = () => {
     console.log('view all items in the basket')
-    this.setState({redirectToItems: true, viewAll: true});
   }
 
   render(){
     const { classes } = this.props;
     if (this.state.redirectToItems) {
-      return <Redirect to={{ pathname: '/basket-items', category : this.state.selectedCategory, viewAll: this.state.viewAll}}/>
+      return <Redirect to={{ pathname: '/item-details', item: this.state.currentItem}}/>
     }
     return(
       <div className="basket-container">
@@ -85,8 +91,21 @@ class Basket extends Component<IBasketProps, IBasketState>{
                     Estimated Cost : $50
                   </div>
                   <div className="nutritional-info">
-                    Nutritional Info
+                    This Basket is a good source of the following Nutrients:
                   </div>
+                  <Table className={classes.table}>
+                      <TableBody>
+                        {this.state.basketNutrients.map(row => (
+                          <TableRow key={row}>
+                            <TableCell component="th" scope="row">
+                              {row}
+                            </TableCell>
+                            <TableCell align="right">
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
                 </Grid>
               </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -107,7 +126,7 @@ class Basket extends Component<IBasketProps, IBasketState>{
                         {this.state.fruits.map(row => (
                           <TableRow key={row}>
                             <TableCell component="th" scope="row">
-                              {row}
+                              <a onClick={() => this.navigateToItems(row)}>{row}</a>
                             </TableCell>
                             <TableCell align="right">
                               <a className="heart"><img src={heart} height="35px" width="35px"/></a>
@@ -139,7 +158,7 @@ class Basket extends Component<IBasketProps, IBasketState>{
                         {this.state.proteins.map(row => (
                           <TableRow key={row}>
                             <TableCell component="th" scope="row">
-                              {row}
+                              <a onClick={() => this.navigateToItems(row)}>{row}</a>
                             </TableCell>
                             <TableCell align="right">
                               <a className="heart"><img src={heart} height="35px" width="35px"/></a>
@@ -170,7 +189,7 @@ class Basket extends Component<IBasketProps, IBasketState>{
                         {this.state.vegetables.map(row => (
                           <TableRow key={row}>
                             <TableCell component="th" scope="row">
-                              {row}
+                              <a onClick={() => this.navigateToItems(row)}>{row}</a>
                             </TableCell>
                             <TableCell align="right">
                               <a className="heart"><img src={heart} height="35px" width="35px"/></a>
@@ -201,7 +220,7 @@ class Basket extends Component<IBasketProps, IBasketState>{
                         {this.state.grains.map(row => (
                           <TableRow key={row}>
                             <TableCell component="th" scope="row">
-                              <a>{row}</a>
+                              <a onClick={() => this.navigateToItems(row)}>{row}</a>
                             </TableCell>
                             <TableCell align="right">
                               <a className="heart"><img src={heart} height="35px" width="35px"/></a>
