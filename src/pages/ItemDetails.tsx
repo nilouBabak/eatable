@@ -70,7 +70,7 @@ class ItemDetails extends Component<IItemDetailsProps, IItemDetailsState> {
             item={true}
             justify="flex-start"
             xs={11}
-            style={{ padding: "20px" }}
+            style={{ padding: "20px", paddingTop: "0px" }}
           >
             
             <FoodItem category="Item Details"
