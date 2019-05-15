@@ -35,7 +35,7 @@ class App extends Component<any, any> {
         }
       },
       personalInfo: {
-        name: "Alisa yo",
+        name: "Sarah",
         age: "32",
         weight: "160",
         height: "5'10"
@@ -63,10 +63,8 @@ class App extends Component<any, any> {
     return (
       <MuiThemeProvider theme={theme}>
         <Router>
-          <div>
             {/* TODO: Render a different version of the user app bar when the user is not logged in */}
             <MenuAppBar> </MenuAppBar>
-
             <AppContextProvider
               value={{ ...this.state, update: this.update.bind(this) }}
             >
@@ -77,7 +75,6 @@ class App extends Component<any, any> {
               <Route path="/basket" component={Basket} />
               <Route path="/item-details" component={ItemDetails} />
             </AppContextProvider>
-          </div>
         </Router>
       </MuiThemeProvider>
     );

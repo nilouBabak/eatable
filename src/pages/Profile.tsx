@@ -20,6 +20,7 @@ import "./styles.scss";
 import classNames from "classnames";
 import UserIcon from "@material-ui/icons/AccountCircle";
 import avatarImage from "./../images/avatar.png";
+import bI from "./../images/basketIcon.png";
 // import ThumbDown from "@material-ui/icons/ThumbDownRounded";
 // import ThumbUp from "@material-ui/icons/ThumbUpRounded";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -179,6 +180,32 @@ class Profile extends Component<IProfileProps, IProfileState> {
       }
     ];
 
+
+    const BasketIcon = (
+      <Avatar
+        alt="basketIcon"
+        src={bI}
+        className={classNames(classes.smallAvatar)}
+      />
+    );
+    const savedBasketRows = [
+      {
+        id: "1",
+        name: "Fruity Basket",
+        value: BasketIcon
+      },
+      {
+        id: "2",
+        name: "Farro Grains",
+        value: BasketIcon
+      },
+      {
+        id: "3",
+        name: "Lasagna Items",
+        value: BasketIcon
+      }
+    ];
+
     return (
       <Grid container xs={12} direction="column" alignItems="center">
         <Grid
@@ -314,8 +341,19 @@ class Profile extends Component<IProfileProps, IProfileState> {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Grid container={true} direction="column">
-                  <Typography> Here is a list of your saved baskets</Typography>
-                  <br />
+                  <Typography> Click on a saved basket to view</Typography>&nbsp;
+                  <Table className={classes.table}>
+                    <TableBody>
+                      {savedBasketRows.map(row => (
+                        <TableRow key={row.id}>
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="right">{row.value}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </Grid>
               </ExpansionPanelDetails>
             </ExpansionPanel>
