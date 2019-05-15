@@ -14,8 +14,8 @@ import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import basketImg from "./../images/basketImage.png";
-import {withRouter} from 'react-router-dom'
-import { Route, Redirect } from 'react-router'
+import { withRouter } from "react-router-dom";
+import { Route, Redirect } from "react-router";
 
 import {
   Drawer,
@@ -24,7 +24,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Avatar
+  Avatar,
+  Button
 } from "@material-ui/core";
 // import { RouterLink } from "react-router-dom";
 const linkText = ["Profile", "Quick Preferences", "Your Basket", "Log out"];
@@ -84,6 +85,9 @@ class MenuAppBar extends React.Component<any, IMenuAppBarState> {
     this.setState({ open: false });
   };
 
+  handleClick = (event: { currentTarget: any }) => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
   handleChange = (event: { target: { checked: any } }) => {
     this.setState({ auth: event.target.checked });
   };
@@ -100,7 +104,8 @@ class MenuAppBar extends React.Component<any, IMenuAppBarState> {
     const { classes, history } = this.props;
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
-    console.log(auth, "auth");
+    console.log(this.props.history.location.pathName, "auth");
+
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -108,78 +113,48 @@ class MenuAppBar extends React.Component<any, IMenuAppBarState> {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
+              onClick={() => history.push("/basket")}
               className={classNames(classes.menuButton, open && classes.hide)}
             >
-              <AccountCircle />
+              <BasketIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               eatable
             </Typography>
 
-            {auth && (
-              <div>
-                <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  onClick={()=> history.push("/basket")} 
-                  className={classNames(
-                    classes.menuButton,
-                    open && classes.hide
-                  )}
+            <div>
+              <Button
+                aria-owns={anchorEl ? "simple-menu" : undefined}
+                aria-haspopup="true"
+                onClick={this.handleClick}
+              >
+                <AccountCircle style={{ color: "#ffff" }} />
+              </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={this.handleClose}
+              >
+                <MenuItem onClick={() => {  this.setState({ anchorEl: null }); this.props.history.push("/profile")}}>
+                  Profile
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {  this.setState({ anchorEl: null }); this.props.history.push("/preferences")}}
                 >
-                  <BasketIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
-            )}
+                  Preferences
+                </MenuItem>
+                <MenuItem onClick={() => {  this.setState({ anchorEl: null }); this.props.history.push("/basket")}}>
+                  My basket
+                </MenuItem>
+                <MenuItem onClick={() => {  this.setState({ anchorEl: null });this.props.history.push("/")}}>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </div>
           </Toolbar>
         </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={this.state.open}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              Menu <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            {linkText.map((text, index) => (
-              <ListItem button component="a" key={text} href={links[index]}>
-                {/* <ListItem button component={MyLinks} key={text}> */}
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-        </Drawer>
-      </div>
+        </div>
     );
   }
 }
