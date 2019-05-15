@@ -19,14 +19,14 @@ import {
 import "./styles.scss";
 import classNames from "classnames";
 import UserIcon from "@material-ui/icons/AccountCircle";
-import avatarImage from "./../images/avatar.png"
+import avatarImage from "./../images/avatar.png";
 // import ThumbDown from "@material-ui/icons/ThumbDownRounded";
 // import ThumbUp from "@material-ui/icons/ThumbUpRounded";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import heart from '../Assets/heart.png';
-import booger from '../Assets/booger.png';
-
+import heart from "../Assets/heart.png";
+import booger from "../Assets/booger.png";
+import { AppContextConsumer } from "./../components/AppContext";
 const styles = (theme: Theme) => ({
   avatar: {
     margin: 10
@@ -52,13 +52,68 @@ const styles = (theme: Theme) => ({
   }
 });
 
+interface IFavouritesObject {
+  likes: string[];
+  dislikes: string[];
+}
+
+interface IPersonalInfoObject {
+  name: string;
+  age: number;
+  weight: number;
+  height: number;
+}
+
+interface IPreferenceState {
+  budget: number;
+  dietType: string;
+  allergies: string[];
+  favourites: IFavouritesObject;
+  personalInfo: IPersonalInfoObject;
+}
+
+interface IProfileState {
+  preferences: IPreferenceState;
+}
+
 interface IProfileProps extends WithStyles {}
-class Profile extends Component<IProfileProps> {
+class Profile extends Component<IProfileProps, IProfileState> {
+  state = {
+    preferences: {
+      budget: 0,
+      dietType: "",
+      allergies: [],
+      favourites: {
+        likes: [],
+        dislikes: []
+      },
+      personalInfo: {
+        name: "",
+        age: 0,
+        weight: 0,
+        height: 0
+      }
+    }
+  };
+
   render() {
     const { classes } = this.props;
+    const { preferences } = this.state;
 
-    const likeComponent =     <Avatar alt="avatar" src={heart} className={classNames(classes.smallAvatar)}/>    ;
-    const dislikeComponent =     <Avatar alt="avatar" src={booger} className={classNames(classes.smallAvatar)}/>    ;
+    const likeComponent = (
+      <Avatar
+        alt="avatar"
+        src={heart}
+        className={classNames(classes.smallAvatar)}
+      />
+    );
+    const dislikeComponent = (
+      <Avatar
+        alt="avatar"
+        src={booger}
+        className={classNames(classes.smallAvatar)}
+      />
+    );
 
     let id = 0;
     function createData(name: string, value: string) {
@@ -66,21 +121,18 @@ class Profile extends Component<IProfileProps> {
       return { id, name, value };
     }
 
+    // for each preference that is set, create a row with a key and value
     const rows = [
       createData("Budget", "$25-$50"),
       createData("Type of Diet", "Ketogenic"),
       createData("Allergies", "None")
-      // createData("Likes", "Strawberry, Strawberry, Strawberry "),
-      // createData("Dislikes", "Strawberry, Strawberry, Strawberry ")
     ];
 
     const aboutMeRows = [
       {
         id: "5",
         name: "Avatar",
-        value: (
-          <Avatar alt="avatar" src={avatarImage}/>
-        )
+        value: <Avatar alt="avatar" src={avatarImage} />
       },
       {
         id: "1",
@@ -127,7 +179,6 @@ class Profile extends Component<IProfileProps> {
       }
     ];
 
-
     return (
       <Grid container xs={12} direction="column" alignItems="center">
         <Grid
@@ -140,7 +191,7 @@ class Profile extends Component<IProfileProps> {
             {" "}
             Profile Details{" "}
           </Typography>
-          <Paper style={{ backgroundColor: "lightGrey"}}>
+          <Paper style={{ backgroundColor: "lightGrey" }}>
             <Grid container direction="row" alignItems="center" xs={12}>
               <Grid item sm={2}>
                 <Avatar
@@ -149,8 +200,16 @@ class Profile extends Component<IProfileProps> {
                   className={classNames(classes.avatar, classes.bigAvatar)}
                 />
               </Grid>
-              <Grid item sm={6} style={{ marginRight: "35px"}}  >
-                <Typography> Hello, Sarah! </Typography>
+              <Grid item sm={6} style={{ marginRight: "35px" }}>
+                <AppContextConsumer>
+                  {appContext =>
+                    appContext && (
+                      <Typography>
+                        Hello {appContext.preferences.budget}!
+                      </Typography>
+                    )
+                  }
+                </AppContextConsumer>
                 <Typography>Welcome back to your profile!</Typography>
               </Grid>
             </Grid>
@@ -171,26 +230,18 @@ class Profile extends Component<IProfileProps> {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Grid container={true} direction="column">
-                  <div>
-                    <Table className={classes.table}>
-                      {/* <TableHead>
-                        <TableRow>
-                          <TableCell>Category</TableCell>
-                          <TableCell align="right">Value</TableCell>
+                  <Table className={classes.table}>
+                    <TableBody>
+                      {rows.map(row => (
+                        <TableRow key={row.id}>
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="right">{row.value}</TableCell>
                         </TableRow>
-                      </TableHead> */}
-                      <TableBody>
-                        {rows.map(row => (
-                          <TableRow key={row.id}>
-                            <TableCell component="th" scope="row">
-                              {row.name}
-                            </TableCell>
-                            <TableCell align="right">{row.value}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                      ))}
+                    </TableBody>
+                  </Table>
                   <ExpansionPanel>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                       <Typography className={classes.heading}>
@@ -198,23 +249,19 @@ class Profile extends Component<IProfileProps> {
                       </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                    <Grid container={true} direction="column">
-                        <div>
-                          <Table className={classes.table}>
-                            <TableBody>
-                              {favouritesRows.map(row => (
-                                <TableRow key={row.id}>
-                                  <TableCell component="th" scope="row">
-                                    {row.name}
-                                  </TableCell>
-                                  <TableCell align="right">
-                                    {row.value}
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                            </TableBody>
-                          </Table>
-                        </div>
+                      <Grid container={true} direction="column">
+                        <Table className={classes.table}>
+                          <TableBody>
+                            {favouritesRows.map(row => (
+                              <TableRow key={row.id}>
+                                <TableCell component="th" scope="row">
+                                  {row.name}
+                                </TableCell>
+                                <TableCell align="right">{row.value}</TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
                       </Grid>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>

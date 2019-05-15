@@ -108,7 +108,7 @@ class MenuAppBar extends React.Component<IMenuAppBarProps, IMenuAppBarState> {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              Eatable
+              eatable
             </Typography>
             {auth && (
               <div>
