@@ -77,6 +77,18 @@ class ItemDetails extends Component<IItemDetailsProps, IItemDetailsState> {
             <div style={{ fontWeight: 600,  fontSize: 17, marginBottom: 10}}>
             {this.state.item}
             </div>
+{this.state.item === "Farro" && (
+  <Typography color="inherit"  style={{ padding: "20px", paddingTop: "0px" }}>
+  Farro is a food composed of the grains of certain wheat species, sold dried, and prepared by cooking in water until soft. People eat it plain, and often use it as an ingredient in salads, soups, and other dishes.
+ </Typography>
+
+)}
+{this.state.item === "Mango" && (
+  <Typography color="inherit"  style={{ padding: "20px", paddingTop: "0px" }}>
+  Did you know? More fresh mangoes are eaten around the world every day than any other fruit. Mangoes are great for smoothies and more!
+   </Typography>
+
+)}
             <Typography color="inherit">
              Here are the nutritional facts of {this.state.item}:
             </Typography>

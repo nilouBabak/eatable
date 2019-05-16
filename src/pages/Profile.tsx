@@ -139,7 +139,13 @@ class Profile extends Component<any, IProfileState> {
       {
         id: "1",
         name: "Name",
-        value: "Sarah"
+        value:    <AppContextConsumer>
+        {appContext =>
+          appContext && <p>{appContext.personalInfo.name} </p>
+          
+        }
+      </AppContextConsumer>
+
       },
       {
         id: "2",
@@ -161,22 +167,22 @@ class Profile extends Component<any, IProfileState> {
     const favouritesRows = [
       {
         id: "1",
-        name: "Strawberry",
+        name: "Mango",
         value: likeComponent
       },
       {
         id: "2",
-        name: "Almonds",
+        name: "Almond",
         value: likeComponent
       },
       {
         id: "3",
-        name: "Lettuce",
+        name: "Quinoa",
         value: likeComponent
       },
       {
         id: "4",
-        name: "Yogurt",
+        name: "Broccoli",
         value: dislikeComponent
       }
     ];
@@ -269,7 +275,7 @@ class Profile extends Component<any, IProfileState> {
                       ))}
                     </TableBody>
                   </Table>
-                  <ExpansionPanel>
+                  <ExpansionPanel defaultExpanded={true}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                       <Typography className={classes.heading}>
                         Favourites
@@ -293,7 +299,7 @@ class Profile extends Component<any, IProfileState> {
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
 
-                  <ExpansionPanel defaultExpanded={true}>
+                  <ExpansionPanel >
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                       <Typography className={classes.heading}>
                         About Me
