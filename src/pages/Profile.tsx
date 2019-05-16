@@ -213,7 +213,7 @@ class Profile extends Component<any, IProfileState> {
     ];
 
     return (
-      <Grid container xs={12} direction="column" alignItems="center">
+      <Grid container xs={12} direction="column" alignItems="center" style={{marginBottom: "30px"}}>
         <Grid
           container={true}
           justify="flex-start"
@@ -253,6 +253,7 @@ class Profile extends Component<any, IProfileState> {
           classes={{ rounded: classes.rounded }}
           elevation={10}
           square={false}
+
         >
           <Grid>
             <ExpansionPanel defaultExpanded={true}>
